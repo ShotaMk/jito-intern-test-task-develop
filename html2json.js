@@ -307,7 +307,7 @@ function closeCurrentNode(tagContent, stack) {
 }
 
 function appendText(text, stack) {
-  const content = text.trim();
+  const content = normalizeTextContent(text);
 
   if (content) {
     appendNode(createTextNode(content), stack);
@@ -320,6 +320,10 @@ function appendTextToNode(text, node) {
   if (content) {
     node.children.push(createTextNode(content));
   }
+}
+
+function normalizeTextContent(text) { 
+  return text.replace(/\s+/g, " ").trim();
 }
 
 function appendNode(node, stack) {
